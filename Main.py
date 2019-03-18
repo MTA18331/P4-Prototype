@@ -4,19 +4,23 @@ import matplotlib.pyplot as plt
 
 
 # Takes a numpy array as an input
-def convert(array):
+def convert(array, duration):
     i = 0
     k = 0.64
+    frequency = np.empty(shape=(len(array), 1), dtype=np.complex)
     while i < 1:
         j = 1
         while j < len(array):
             if k != 0:
-                scalar = time*k
-                freq = array[j]/scalar
+                scalar = duration*k
+                frequency[j, i] = array[j, i]/scalar
+                #print("Array: ", array[j])
+            #print("i: ", i, "j: ", j)
+            k += 0.64
+            j += 1
+        i += 1
 
-        k += 0.64
-        j += 1
-    i += 1
+    return frequency
 
 
 def interval(freq, time):
@@ -35,10 +39,15 @@ def plot(array, time):
 # Write Audio Files/ and then the name of the intended audio file
 sampleRate, samples = sp.read("Audio Files/Tone_2.wav")
 #  SampleRate = number of samples per second and samples = 2D Array
-print("SampleRate: ", sampleRate, " sample: ", samples)
+print("SampleRate: ", sampleRate, " Number of samples: ", len(samples))
 data = np.fft.fft(samples) # Returns 2D array with complex numbers
 time = data.shape[0]/sampleRate
 print("Time: ", time)
+freq = convert(data, time)
+print("freq: ", freq[2])
+
+
+
 
 
 
