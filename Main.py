@@ -4,17 +4,19 @@ import matplotlib.pyplot as plt
 import warnings
 
 
-# Takes a numpy array as an input
+# Takes a numpy array as an input and converts to an array of base frequencies
 def convert(array, duration):
     i = 0
-    k = 0.64
+    k = 0.64  # the interval between frequencies
+    #  assign frequency to empty numpy array with complex numbers as data type which store the base frequency
     frequency = np.empty(shape=(len(array), 1), dtype=np.complex)
-    while i < 1:
+    while i < 1:  # x dimension (rows) in input array
         j = 1
-        while j < len(array):
-            if k != 0:
+        while j < len(array):  # y dimension (coloumns) in input array (Number of samples)
+            if k != 0:  # if k does not equal 0 (since scalar must not be 0 which will crash the program)
                 scalar = duration*k
-                frequency[j, i] = array[j, i]/scalar
+                # Calculate base frequency by dividing frequency in fft array with scalar (interval)
+                frequency[j, i] = array[j, i]/scalar  # assigns elements in frequency array to base frequency
                 #print("Array: ", array[j])
             #print("i: ", i, "j: ", j)
             k += 0.64
