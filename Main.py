@@ -38,8 +38,8 @@ def plot(array, time):
 
 
 with warnings.catch_warnings():
-    warnings.simplefilter("ignore")  # ignore annoying WavFileWarning
-    sampleRate, samples = sp.read("Audio Files/Tone_2.wav")  # Write Audio Files and the name of the intended audio file
+    warnings.simplefilter("ignore")  # Ignore annoying WavFileWarning
+    sampleRate, samples = sp.read("Audio Files/Tone_2.wav")  # Read Audio Files and the name of the intended audio file
 
 
 #  SampleRate = number of samples per second and samples = 2D Array
