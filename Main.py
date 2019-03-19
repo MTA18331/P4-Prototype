@@ -7,17 +7,14 @@ import warnings
 # Takes a numpy array as an input
 def convert(array, duration):
     i = 0
-    k = 0.64  # The interval between  the base frequency
-    # Assigns frequency to empty array with the data type complex numbers
+    k = 0.64
     frequency = np.empty(shape=(len(array), 1), dtype=np.complex)
-    while i < 1:  # x dimension in input array
+    while i < 1:
         j = 1
-        while j < len(array):  # y dimension in input array
+        while j < len(array):
             if k != 0:
-                # k must not be zero because that will cause scalar to divide by zero which will crash the program
                 scalar = duration*k
-                #  Base frequency equals element in fft array divide by the scalar which is time duration times interval between frequencies
-                frequency[j, i] = array[j, i]/scalar  # assigns an element in the frequency array to be equal to the base frequency.
+                frequency[j, i] = array[j, i]/scalar
                 #print("Array: ", array[j])
             #print("i: ", i, "j: ", j)
             k += 0.64
