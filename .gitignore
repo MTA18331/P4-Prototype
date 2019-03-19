@@ -105,3 +105,6 @@ workspace.xml
 
 # mypy
 .mypy_cache/
+.idea/misc.xml
+.idea/P4-Prototype.iml
+.idea/workspace.xml
