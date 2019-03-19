@@ -15,7 +15,20 @@ from tkinter import filedialog
 
 root = tk.Tk()
 audiofile = ""
+labelsVisible = False
+#<editor-fold desc="tkinter string variables">
 root.text = tkinter.StringVar()
+root.SampleRatelabeltext = tkinter.StringVar()
+root.NumberOfSampleslabeltext = tkinter.StringVar()
+root.timelabeltext = tkinter.StringVar()
+root.date1labeltext = tkinter.StringVar()
+root.date2labeltext = tkinter.StringVar()
+root.date3labeltext = tkinter.StringVar()
+root.freq1labellabeltext = tkinter.StringVar()
+root.freq2labellabeltext = tkinter.StringVar()
+root.freq3labellabeltext = tkinter.StringVar()
+root.freq4labellabeltext = tkinter.StringVar()
+#</editor-fold>
 
 
 def audioProcessing():
@@ -39,18 +52,37 @@ def audioProcessing():
         print("freq: ", freq[4])
         pe.pitchCompare(freq)
 
-        SampleRatelabel = Label(root, text="SampleRate: " + '%s' % sampleRate, ).pack(anchor=S)
-        NumberOfSampleslabel = Label(root, text="Number of samples: " + '%s' % len(samples), ).pack(anchor=S)
-        timelabel = Label(root, text="Time: " + '%s' % time, ).pack(anchor=S)
-        date1label = Label(root, text="Data: " + '%s' % data[1], ).pack(anchor=S)
-        date2label = Label(root, text="Data: " + '%s' % data[2], ).pack(anchor=S)
-        date3label = Label(root, text="Data: " + '%s' % data[3], ).pack(anchor=S)
-        freq1label = Label(root, text="Freq: " + '%s' % freq[1], ).pack(anchor=S)
-        freq2label = Label(root, text="Freq: " + '%s' % freq[2], ).pack(anchor=S)
-        freq3label = Label(root, text="Freq: " + '%s' % freq[3], ).pack(anchor=S)
-        freq4label = Label(root, text="Freq: " + '%s' % freq[4], ).pack(anchor=S)
+
+        buildlabels(sampleRate,samples, time,data,freq)
+
     except FileNotFoundError:
         messagebox.showinfo("Nope", "Choose a file first!")
+
+
+def buildlabels(sampleRate, samples, time, data, freq):
+    global labelsVisible
+    root.SampleRatelabeltext.set("SampleRate: " + '%s' % sampleRate, )
+    root.NumberOfSampleslabeltext.set("Number of samples: " + '%s' % len(samples), )
+    root.timelabeltext.set("Time: " + '%s' % time)
+    root.date1labeltext.set("Data: " + '%s' % data[1])
+    root.date2labeltext.set("Data: " + '%s' % data[2])
+    root.date3labeltext.set("Data: " + '%s' % data[3])
+    root.freq1labellabeltext.set("Freq: " + '%s' % freq[1])
+    root.freq2labellabeltext.set("Freq: " + '%s' % freq[2])
+    root.freq3labellabeltext.set("Freq: " + '%s' % freq[3])
+    root.freq4labellabeltext.set("Freq: " + '%s' % freq[4])
+    if not labelsVisible:
+        SampleRatelabel = Label(root, textvariable=root.SampleRatelabeltext).pack(anchor=S)
+        NumberOfSampleslabel = Label(root, textvariable=root.NumberOfSampleslabeltext).pack(anchor=S)
+        timelabel = Label(root, textvariable=root.timelabeltext).pack(anchor=S)
+        date1label = Label(root, textvariable=root.date1labeltext).pack(anchor=S)
+        date2label = Label(root, textvariable=root.date2labeltext).pack(anchor=S)
+        date3label = Label(root, textvariable=root.date3labeltext).pack(anchor=S)
+        freq1label = Label(root, textvariable=root.freq1labellabeltext).pack(anchor=S)
+        freq2label = Label(root, textvariable=root.freq2labellabeltext).pack(anchor=S)
+        freq3label = Label(root, textvariable=root.freq3labellabeltext).pack(anchor=S)
+        freq4label = Label(root, textvariable=root.freq4labellabeltext).pack(anchor=S)
+        labelsVisible = True
 
 
 def pickfile():
