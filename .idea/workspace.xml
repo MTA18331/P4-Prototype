@@ -11,65 +11,27 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-1226499681">
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="py" value="5" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="Python" value="5" />
-        </counts>
-      </usages-collector>
-    </session>
-    <session id="-1259784253">
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="py" value="2038" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="Python" value="2038" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="py" value="5" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Python" value="5" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="20" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="20" />
+            <state relative-caret-position="147">
+              <caret line="15" selection-start-line="15" selection-end-line="17" selection-end-column="31" />
               <folding>
-                <element signature="e#0#23#0" expanded="true" />
+                <element signature="e#0#14#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Pitch_Estimation.py">
+        <entry file="file://$PROJECT_DIR$/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
+            <state relative-caret-position="255">
+              <caret line="15" column="29" lean-forward="true" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
               <folding>
-                <element signature="e#0#29#0" expanded="true" />
-                <marker date="1552999510725" expanded="true" signature="1252:2303" ph="..." />
-                <marker date="1552999510725" expanded="true" signature="2328:2333" ph="..." />
+                <element signature="e#0#14#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,13 +59,14 @@
         <option value="$PROJECT_DIR$/LED.py" />
         <option value="$PROJECT_DIR$/Main.py" />
         <option value="$PROJECT_DIR$/Pitch_Estimation.py" />
+        <option value="$PROJECT_DIR$/GUI.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="947" />
-    <option name="width" value="982" />
-    <option name="height" value="1042" />
+    <option name="x" value="945" />
+    <option name="width" value="984" />
+    <option name="height" value="1044" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -219,15 +182,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="2575" height="1415" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13813615" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13750985" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23404256" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23382697" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39858156" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -246,12 +209,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Pitch_Estimation.py</url>
-          <line>73</line>
+          <line>71</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Pitch_Estimation.py</url>
-          <line>72</line>
+          <line>70</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -280,9 +243,7 @@
     <entry file="file://$PROJECT_DIR$/Audio Files/Tones.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Audio Files/LED.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Audio Files/LED.py" />
     <entry file="file://$PROJECT_DIR$/Auto_Correlation.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -294,22 +255,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Pitch_Estimation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
+        <state relative-caret-position="419">
+          <caret line="49" column="4" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="4" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
-            <marker date="1552999510725" expanded="true" signature="1252:2303" ph="..." />
-            <marker date="1552999510725" expanded="true" signature="2328:2333" ph="..." />
+            <element signature="e#588#1040#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GUI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="29" lean-forward="true" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="20" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="20" />
+        <state relative-caret-position="147">
+          <caret line="15" selection-start-line="15" selection-end-line="17" selection-end-column="31" />
           <folding>
-            <element signature="e#0#23#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>

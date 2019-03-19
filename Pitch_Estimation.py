@@ -46,8 +46,6 @@ def pitchCompare(array):
 
     min2 = complex(1900 + 0j)
     max2 = complex(2050 + 0j)
-
-
     max3 = complex(0 + 0j)
 
     while i < 1:
