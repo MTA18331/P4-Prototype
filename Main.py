@@ -11,7 +11,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
-
+from tkinter import ttk
 
 root = tk.Tk()
 audiofile = ""
@@ -33,25 +33,37 @@ root.freq4labellabeltext = tkinter.StringVar()
 
 def audioProcessing():
     global audiofile
+    root.bytes=0
+    root.progress["value"] = root.bytes
+
     try:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")  # Ignore annoying WavFileWarning
             sampleRate, samples = sp.read(audiofile)  # Read Audio Files and the name of the intended audio file
     #  SampleRate = number of samples per second and samples = 2D Array
         print("SampleRate: ", sampleRate, " Number of samples: ", len(samples))
+        updateprogressbar()
         data = np.fft.fft(samples)  # Returns 2D array with complex numbers
         time = data.shape[0] / sampleRate
         print("Time: ", time)
+        updateprogressbar()
         freq = pe.convert(data, time)
         print("Data: ", data[1])
+        updateprogressbar()
         print("Data: ", data[2])
+        updateprogressbar()
         print("Data: ", data[3])
+        updateprogressbar()
         print("freq: ", freq[1])
+        updateprogressbar()
         print("freq: ", freq[2])
+        updateprogressbar()
         print("freq: ", freq[3])
+        updateprogressbar()
         print("freq: ", freq[4])
+        updateprogressbar()
         pe.pitchCompare(freq)
-
+        updateprogressbar()
 
         buildlabels(sampleRate,samples, time,data,freq)
 
@@ -72,18 +84,21 @@ def buildlabels(sampleRate, samples, time, data, freq):
     root.freq3labellabeltext.set("Freq: " + '%s' % freq[3])
     root.freq4labellabeltext.set("Freq: " + '%s' % freq[4])
     if not labelsVisible:
-        SampleRatelabel = Label(root, textvariable=root.SampleRatelabeltext).pack(anchor=S)
-        NumberOfSampleslabel = Label(root, textvariable=root.NumberOfSampleslabeltext).pack(anchor=S)
-        timelabel = Label(root, textvariable=root.timelabeltext).pack(anchor=S)
-        date1label = Label(root, textvariable=root.date1labeltext).pack(anchor=S)
-        date2label = Label(root, textvariable=root.date2labeltext).pack(anchor=S)
-        date3label = Label(root, textvariable=root.date3labeltext).pack(anchor=S)
-        freq1label = Label(root, textvariable=root.freq1labellabeltext).pack(anchor=S)
-        freq2label = Label(root, textvariable=root.freq2labellabeltext).pack(anchor=S)
-        freq3label = Label(root, textvariable=root.freq3labellabeltext).pack(anchor=S)
-        freq4label = Label(root, textvariable=root.freq4labellabeltext).pack(anchor=S)
+        SampleRatelabel = Label(root, textvariable=root.SampleRatelabeltext).pack(in_=middle, side=BOTTOM)
+        NumberOfSampleslabel = Label(root, textvariable=root.NumberOfSampleslabeltext).pack(in_=middle, side=BOTTOM)
+        timelabel = Label(root, textvariable=root.timelabeltext).pack(in_=middle, side=BOTTOM)
+        date1label = Label(root, textvariable=root.date1labeltext).pack(in_=middle, side=BOTTOM)
+        date2label = Label(root, textvariable=root.date2labeltext).pack(in_=middle, side=BOTTOM)
+        date3label = Label(root, textvariable=root.date3labeltext).pack(in_=middle, side=BOTTOM)
+        freq1label = Label(root, textvariable=root.freq1labellabeltext).pack(in_=middle, side=BOTTOM)
+        freq2label = Label(root, textvariable=root.freq2labellabeltext).pack(in_=middle, side=BOTTOM)
+        freq3label = Label(root, textvariable=root.freq3labellabeltext).pack(in_=middle, side=BOTTOM)
+        freq4label = Label(root, textvariable=root.freq4labellabeltext).pack(in_=middle, side=BOTTOM)
         labelsVisible = True
 
+def updateprogressbar():
+    root.bytes += 10
+    root.progress["value"] = root.bytes
 
 def pickfile():
     global audiofile
@@ -93,9 +108,44 @@ def pickfile():
     root.text .set(labeltext)
 
 
-b1 = Button(root, text='Open File', command=pickfile).pack(anchor=N)
-currentfilelabel = Label(root, text="current File", textvariable=root.text).pack(anchor=CENTER)
-b2 = Button(root, text='Run Audio Processing', command=audioProcessing, background='red').pack(anchor=S)
+
+top = Frame(root)
+middle = Frame(root)
+middle2 = Frame(root)
+bottom = Frame(root)
+
+top.pack(side=TOP, fill=BOTH, expand=True)
+middle.pack(side=TOP, fill=BOTH, expand=True)
+middle2.pack(side=TOP, fill=BOTH, expand=True)
+bottom.pack(side=BOTTOM, fill=BOTH, expand=True)
+
+root.progress = ttk.Progressbar(root, orient="horizontal", length=200, mode="determinate")
+root.progress.pack(in_=bottom, side=LEFT)
+
+root.maxbytes = 100
+root.bytes = 0
+
+root.progress["value"] = 0
+root.progress["maximum"] = 100
+
+
+openfileButton = Button(root, text="Open File", width=10, height=2, command=pickfile)
+currentfilelabel = Label(root, text="current File", textvariable=root.text)
+openfileButton.pack(in_=top, side=LEFT)
+currentfilelabel.pack(in_=top, side=LEFT)
+
+runaudioprocessingButton = Button(root, text="Run Audio Processing", width=20, height=2, command=audioProcessing, background='red')
+runaudioprocessingButton.pack(in_=middle, side=LEFT)
+
+turnOnLed = Button(root, text="Turn On LED", width=10, height=2, command=LED.turnOnLEDS)
+turnOffLed = Button(root, text="Turn Of LED", width=10, height=2, command=LED.turnOffLEDS)
+turnOnLed.pack(in_=middle2, side=LEFT)
+turnOffLed.pack(in_=middle2, side=LEFT)
+
+
+
+
+
 root.mainloop()
 
 
