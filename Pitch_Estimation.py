@@ -79,9 +79,10 @@ def interval(freq, time):
 
 
 def plot(array, time):
-    plt.plot(convert(array), interval(convert(array), time))
-    plt.xlim(0, 20000)
-    plt.ylim(-1000, 100000)
+    #plt.plot(convert(array, time), interval(convert(array, time), time))
+    plt.plot(array,time)
+    plt.xlim(0, 10000)
+    plt.ylim(-1000, 200000)
     plt.ylabel('Frequency')
     plt.xlabel('Interval')
     plt.show()

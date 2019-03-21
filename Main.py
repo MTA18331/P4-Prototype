@@ -64,6 +64,8 @@ def audioProcessing():
         updateprogressbar()
         pe.pitchCompare(freq)
         updateprogressbar()
+        pe.plot(pe.interval(freq,time),freq)
+
 
         buildlabels(sampleRate,samples, time,data,freq)
 
