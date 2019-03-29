@@ -1,38 +1,14 @@
 import scipy.io.wavfile as sp
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy
+import scipy.signal
+import librosa
 import time
 import random
 import warnings
 
 # Takes a numpy array as an input
-def convert(array, duration):
-    i = 0
-    k = 0.6264  # The interval between  the base frequency
-    complexNum = complex(0+0j)
-    # Assigns frequency to empty array with the data type complex numbers
-    frequency = np.empty(shape=(len(array), 1), dtype=np.complex)
-    while i < 1:  # x dimension in input array
-        j = 1
-        while j < len(array):  # y dimension in input array
-            if k != 0:
-                # k must not be zero because that will cause scalar to divide by zero which will crash the program
-                scalar = duration*k
-                #  Base frequency equals element in fft array divide by the scalar which is time duration times interval between frequencies
-                frequency[j, i] = array[j, i]/scalar  # assigns an element in the frequency array to be equal to the base frequency.
-                #print("Array: ", array[j])
-            k += 0.645
-            if k >= 7.076399999999998:
-              k = 0.6264
-            #print("i: ", i, "j: ", j)
-            j += 1
-
-
-
-        i += 1
-
-    return frequency
-
 
 def pitchCompare(array):
 
@@ -73,20 +49,76 @@ def pitchCompare(array):
     return tmp
 
 
+def hammonicSum(array, lowLimit, highLimit,numOfInterval):
 
-def interval(freq, time):
-    return freq*time
+    tmp = np.empty(shape=(len(array), 1), dtype=np.complex)
+    index = 0
+    storedlimit = lowLimit
+    complexNum = complex(0)
+    scalar = 0
+    while lowLimit < highLimit:
+
+        while scalar < numOfInterval:
+            if lowLimit*scalar < len(array):
+                complexNum = pow(np.abs(array[lowLimit*scalar]), 2)+complexNum
+            scalar += 1
+
+        tmp[index] = complexNum
+        index += 1
+        scalar = 0
+        lowLimit += 1
+        complexNum = 0
+        #print(np.argmax(tmp), "with value", np.amax(tmp))
+    freq = storedlimit + np.argmax(tmp)
+    print('this is frequency!!!!!',freq)
+    return freq
+
+def load(num):
+
+    if num == 1:
+        tone_1,sampleRate = librosa.load('Audio Files/Tone1.wav',res_type='scipy')
+        return tone_1
+    elif num == 2:
+        tone_2,sampleRate = librosa.load('Audio Files/Tone2.wav',res_type='scipy')
+        return tone_2
+    elif num == 3:
+        tone_3,sampleRate = librosa.load('Audio Files/Tone3.wav',res_type='scipy')
+        return tone_3
 
 
-def plot(array, time):
-    #plt.plot(convert(array, time), interval(convert(array, time), time))
-    plt.plot(array,time)
-    plt.xlim(0, 10000)
-    plt.ylim(-1000, 200000)
-    plt.ylabel('Frequency')
-    plt.xlabel('Interval')
+
+def fft(array):
+    data = np.fft.fft(array)
+    #data2 = scipy.fft(x)
+
+    return data
+
+def plot(array,samplerate):
+    time = array.shape[0] / samplerate
+    x_mag = np.absolute(array)
+    f = np.linspace(0,samplerate,len(x_mag))
+    print(np.argmax(array))
+    value = np.argmax(array)
+    print(array[value])
+    print(time)
+
+    plt.figure(figsize=(13,5))
+    plt.plot(f, x_mag)
+    plt.xlabel('frequency hZ')
+
+    plt.figure(figsize=(13,5))
+    plt.plot(f[8000:11000],x_mag[8000:11000])
+    plt.xlabel('frequency HZ')
     plt.show()
 
+samplerate = 22050
+lowLimit = 5200
+highLimit = 5300
+numOfInterval = 10
+load(3)
+fft(load(3))
+hammonicSum(fft(load(3)),lowLimit,highLimit,numOfInterval)
+plot(fft(load(3)), samplerate)
 
 
 
