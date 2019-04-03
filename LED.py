@@ -11,6 +11,7 @@ def turnOnLEDS():
     #pi.set_PWM_dutycycle(pin, intensity)
     s= 1+1
 
+
 def turnOffLEDS():
     #pi.set_PWM_dutycycle(pin, 0)
     s=1+1

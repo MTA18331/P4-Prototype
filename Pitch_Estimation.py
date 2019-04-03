@@ -84,31 +84,31 @@ def hammonicSum(array, lowLimit, highLimit):
 
 def load(enum):
 
-    if enum == Enum.AudioFiles.tone1:
+    if enum == Enum.AudioFiles.tone1:  # Frequency = 30.86771, Note = B0
         tone_1, sampleRate = librosa.load('Audio Files/Tone1.wav', res_type='scipy')
         return tone_1, sampleRate
-    elif enum == Enum.AudioFiles.tone2:
+    elif enum == Enum.AudioFiles.tone2:  # Frequency = 783.9909, Note = G5
         tone_2, sampleRate = librosa.load('Audio Files/Tone2.wav', res_type='scipy')
         return tone_2, sampleRate
-    elif enum == Enum.AudioFiles.tone3:
+    elif enum == Enum.AudioFiles.tone3:  # Frequency = 5274.04, Note = B8
         tone_3, sampleRate = librosa.load('Audio Files/Tone3.wav', res_type='scipy')
         return tone_3, sampleRate
-    elif enum == Enum.AudioFiles.tone4:
+    elif enum == Enum.AudioFiles.tone4:  # tone_6, tone_7, tone_8
         tone_4, sampleRate = librosa.load('Audio Files/3_tones.wav', res_type='scipy')
         return tone_4, sampleRate
-    elif enum == Enum.AudioFiles.tone5:
+    elif enum == Enum.AudioFiles.tone5:  # Frequency = 783.9909, Note = G5
         tone_5, sampleRate = librosa.load('Audio Files/G5piano.wav', res_type='scipy')
         return tone_5, sampleRate
-    elif enum == Enum.AudioFiles.tone6:
+    elif enum == Enum.AudioFiles.tone6:  # Frequency = 261.63, Note = C4
         tone_6, sampleRate = librosa.load('Audio Files/Tone_1_261.wav', res_type='scipy')
         return tone_6, sampleRate
-    elif enum == Enum.AudioFiles.tone7:
+    elif enum == Enum.AudioFiles.tone7:  # Frequency = 82.41, Note = E2
         tone_7, sampleRate = librosa.load('Audio Files/Tone2_82.wav', res_type='scipy')
         return tone_7, sampleRate
-    elif enum == Enum.AudioFiles.tone8:
+    elif enum == Enum.AudioFiles.tone8:  # Frequency = 1975.533, Note = B6
         tone_8, sampleRate = librosa.load('Audio Files/Tone_3_1975.wav', res_type='scipy')
         return tone_8, sampleRate
-    elif enum == Enum.AudioFiles.tone9:
+    elif enum == Enum.AudioFiles.tone9:  # Frequency = 783.9909, Note = G5
         tone_9, sampleRate = librosa.load('Audio Files/toneg5.wav', res_type='scipy')
         return tone_9, sampleRate
 
@@ -136,15 +136,15 @@ def plot(array,samplerate):
     plt.xlabel('Frequency Hz')
     plt.ylabel('Amplitude')
 
-    plt.figure(figsize=(13,5))
+    plt.figure(figsize=(13, 5))
     plt.plot(f[1320:1370], x_mag[1320:1370])
     plt.xlabel('frequency HZ')
     plt.show()
 
 
-lowLimit = 200
-highLimit = 820
-tone1, sampleRate = load(Enum.AudioFiles.tone1)
+lowLimit = 78
+highLimit = 86
+tone1, sampleRate = load(Enum.AudioFiles.tone4)
 dft = fft(tone1)
 hammonicSum(dft, lowLimit, highLimit)
 plot(dft, sampleRate)
