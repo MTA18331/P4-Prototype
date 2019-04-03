@@ -49,47 +49,60 @@ def pitchCompare(array):
     return tmp
 
 
-def hammonicSum(array, lowLimit, highLimit,numOfInterval):
+def hammonicSum(array, lowLimit, highLimit):
 
     tmp = np.empty(shape=(len(array), 1), dtype=np.complex)
     index = 0
     storedlimit = lowLimit
     complexNum = complex(0)
-    scalar = 0
+    scalar = 1
+    numOfInterval = 10
+
     while lowLimit < highLimit:
 
         while scalar < numOfInterval:
             if lowLimit*scalar < len(array):
-                complexNum = pow(np.abs(array[lowLimit*scalar]), 2)+complexNum
+                complexNum = pow(np.abs(array[lowLimit*scalar]), 2) + complexNum
             scalar += 1
 
         tmp[index] = complexNum
         index += 1
-        scalar = 0
+        scalar = 1
         lowLimit += 1
         complexNum = 0
+
         #print(np.argmax(tmp), "with value", np.amax(tmp))
+
     freq = storedlimit + np.argmax(tmp)
-    print('this is frequency!!!!!',freq)
+    print(np.argmax(tmp))
+    print('this is something', np.amax(tmp))
+    print('this is something else!', freq)
+
+
+
+
+
+
     return freq
+
 
 def load(num):
 
     if num == 1:
-        tone_1,sampleRate = librosa.load('Audio Files/Tone1.wav',res_type='scipy')
+        tone_1,sampleRate = librosa.load('Audio Files/G5piano.wav', res_type='scipy')
         return tone_1
     elif num == 2:
-        tone_2,sampleRate = librosa.load('Audio Files/Tone2.wav',res_type='scipy')
+        tone_2,sampleRate = librosa.load('Audio Files/Tone2.wav', res_type='scipy')
         return tone_2
     elif num == 3:
-        tone_3,sampleRate = librosa.load('Audio Files/Tone3.wav',res_type='scipy')
+        tone_3,sampleRate = librosa.load('Audio Files/Tone3.wav', res_type='scipy')
         return tone_3
 
 
 
 def fft(array):
     data = np.fft.fft(array)
-    #data2 = scipy.fft(x)
+    #data = scipy.fft(array)
 
     return data
 
@@ -98,27 +111,34 @@ def plot(array,samplerate):
     x_mag = np.absolute(array)
     f = np.linspace(0,samplerate,len(x_mag))
     print(np.argmax(array))
-    value = np.argmax(array)
-    print(array[value])
-    print(time)
+    #value = np.argmax(array)
+    #print(array[value])
+    #print(x_mag[value])
+
+
+
+   #print(time)
 
     plt.figure(figsize=(13,5))
     plt.plot(f, x_mag)
-    plt.xlabel('frequency hZ')
+    plt.xlabel('Frequency Hz')
+    plt.ylabel('Amplitude')
 
     plt.figure(figsize=(13,5))
-    plt.plot(f[8000:11000],x_mag[8000:11000])
+    plt.plot(f[1320:1370],x_mag[1320:1370])
     plt.xlabel('frequency HZ')
     plt.show()
 
+
 samplerate = 22050
-lowLimit = 5200
-highLimit = 5300
-numOfInterval = 10
-load(3)
-fft(load(3))
-hammonicSum(fft(load(3)),lowLimit,highLimit,numOfInterval)
-plot(fft(load(3)), samplerate)
+lowLimit = 200
+highLimit = 820
+
+
+loaded = load(1)
+array = fft(loaded)
+hammonicSum(array, lowLimit, highLimit)
+plot(array, samplerate)
 
 
 
