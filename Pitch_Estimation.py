@@ -56,7 +56,7 @@ def hammonicSum(array, minVal, maxVal):
     index = 0
     start = minVal
     iterations = 10
-    while minVal < maxVal:
+    while minVal <= maxVal:
         scalar = 1
         summation = 0
         while scalar < iterations:
