@@ -50,34 +50,29 @@ def pitchCompare(array):
     return tmp
 
 
-def hammonicSum(array, lowLimit, highLimit):
+def hammonicSum(array, minVal, maxVal):
 
     tmp = np.empty(shape=(len(array), 1), dtype=np.complex)
     index = 0
-    storedlimit = lowLimit
-    complexNum = complex(0)
-    scalar = 1
-    numOfInterval = 10
-
-    while lowLimit < highLimit:
-
-        while scalar < numOfInterval:
-            if lowLimit*scalar < len(array):
-                complexNum = pow(np.abs(array[lowLimit*scalar]), 2) + complexNum
-            scalar += 1
-
-        tmp[index] = complexNum
-        index += 1
+    start = minVal
+    iterations = 10
+    while minVal < maxVal:
         scalar = 1
-        lowLimit += 1
-        complexNum = 0
+        summation = 0
+        while scalar < iterations:
+            if minVal*scalar < len(array):
+                summation += pow(np.abs(array[minVal*scalar]), 2)
+            scalar += 1
+        tmp[index] = summation
+        index += 1
+        minVal += 1
 
         #print(np.argmax(tmp), "with value", np.amax(tmp))
 
-    freq = storedlimit + np.argmax(tmp)
+    freq = start + np.argmax(tmp)
     print(np.argmax(tmp))
-    print('this is something', np.amax(tmp))
-    print('this is something else!', freq)
+    print('tmp - Maximum Value: ', np.amax(tmp))
+    print('Freq: ', freq)
 
     return freq
 
@@ -103,7 +98,7 @@ def load(enum):
         tone_6, sampleRate = librosa.load('Audio Files/Tone_1_261.wav', res_type='scipy')
         return tone_6, sampleRate
     elif enum == Enum.AudioFiles.tone7:  # Frequency = 82.41, Note = E2
-        tone_7, sampleRate = librosa.load('Audio Files/Tone2_82.wav', res_type='scipy')
+        tone_7, sampleRate = librosa.load('Audio Files/Tone_2_82.wav', res_type='scipy')
         return tone_7, sampleRate
     elif enum == Enum.AudioFiles.tone8:  # Frequency = 1975.533, Note = B6
         tone_8, sampleRate = librosa.load('Audio Files/Tone_3_1975.wav', res_type='scipy')
@@ -142,12 +137,75 @@ def plot(array,samplerate):
     plt.show()
 
 
+def Estimate(array, sampleRate, deltaTime, EnumOctave):
+
+    numberOfSamples = sampleRate*deltaTime
+    i = round(len(array)/numberOfSamples)  # Number of total iterations
+    notes = np.empty(shape=(i, 1), dtype=Enum.Notes)
+    tmp = np.empty(shape=(len(array), 1), dtype=complex)
+    start = 0
+    index = 0
+    iterations = 10
+    l = 0
+    print("Array Length: ", len(array))
+    print("i: ", i)
+    print("Time: ", len(array)/sampleRate)
+
+    if Enum.Octaves.oct4:
+        minVal = 1936
+        maxVal = 2013
+        tmpMin = minVal
+    while l < i:
+        minVal = tmpMin
+        while minVal < maxVal:
+            scalar = 1
+            summation = 0
+            while scalar < iterations:
+                if scalar*minVal+start < start+numberOfSamples:
+                    summation += pow(np.abs(array[minVal*scalar+start]), 2)
+                scalar += 1
+            tmp[index] = summation
+            index += 1
+            minVal += 1
+        freq = np.argmax(tmp)
+        start += numberOfSamples
+        print("Max Freq: ", np.argmax(tmp))
+        print("Min Freq: ", np.argmin(tmp))
+        print("Max Freq Value: ", np.amax(tmp))
+        print("Min Freq Value: ", np.amin(tmp))
+        print("Freq: ", freq)
+        if 247 < freq <= 276:
+            notes[l] = Enum.Notes.C4
+        elif 278 < freq <= 310:
+            notes[l] = Enum.Notes.D4
+        elif 312 < freq <= 340:
+            notes[l] = Enum.Notes.E4
+        elif 342 < freq <= 368:
+            notes[l] = Enum.Notes.F4
+        elif 370 < freq <= 390:
+            notes[l] = Enum.Notes.G4
+        elif 430 < freq <= 465:
+            notes[l] = Enum.Notes.A4
+        elif 482 < freq <= 520:
+            notes[l] = Enum.Notes.B4
+        elif 78 < freq <= 86:
+            notes[l] = Enum.Notes.E2
+        elif 1936 < freq <= 2113:
+            notes[l] = Enum.Notes.B6
+        else:
+            notes[l] = Enum.Notes.N
+        print("Note: ", notes[l])
+        print("l: ", l)
+        l += 1
+
+
 lowLimit = 78
 highLimit = 86
-tone1, sampleRate = load(Enum.AudioFiles.tone4)
-dft = fft(tone1)
-hammonicSum(dft, lowLimit, highLimit)
-plot(dft, sampleRate)
+tone, sampleRate = load(Enum.AudioFiles.tone4)
+dft = fft(tone)
+deltaTime = 1
+Estimate(dft, sampleRate, deltaTime, Enum.Octaves.oct4)
+
 
 
 
