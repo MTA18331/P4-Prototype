@@ -145,24 +145,23 @@ def plot(array,samplerate):
 
 def Estimate(array, sampleRate, deltaTime, EnumOctave):
 
-    numberOfSamples = sampleRate*deltaTime
-    i = int(math.floor((len(array)/numberOfSamples))) # Number of total iterations
+    numberOfSamples = int(sampleRate*deltaTime)
+    i = int(math.floor((len(array)/numberOfSamples)))  # Number of total iterations
     notes = np.empty(shape=(i, 1), dtype=Enum.Notes)
     tmp = np.empty(shape=(len(array), 1), dtype=complex)
     start = 0
-    index = 0
+
     iterations = 10
     l = 0
-    print("Array Length: ", len(array))
-    print("i: ", i)
-    print("Time: ", len(array)/sampleRate)
+    print('NUM', numberOfSamples)
     if Enum.Octaves.oct4:
         minVal = 1045
-        maxVal = 1500
+        maxVal = 1600
         tmpMin = minVal
     while l < i:
         minVal = tmpMin
-        while minVal < maxVal:
+        index = 0
+        while minVal <= maxVal:
             scalar = 1
             summation = 0
             while scalar < iterations:
@@ -172,14 +171,12 @@ def Estimate(array, sampleRate, deltaTime, EnumOctave):
             tmp[index] = summation
             index += 1
             minVal += 1
-        freq = np.argmax(tmp) +tmpMin
-        start += int(numberOfSamples)
-        print(start)
-        print('NUM', numberOfSamples)
+            #print("minVal", minVal)
+        freq = tmpMin + np.argmax(tmp)
+        start += numberOfSamples
+        print("Start: ", start)
         print("Max Freq: ", np.argmax(tmp))
         print("Min Freq: ", np.argmin(tmp))
-        print("Max Freq Value: ", np.amax(tmp))
-        print("Min Freq Value: ", np.amin(tmp))
         print("Freq: ", freq)
         if 967 < freq <= 1010:
             notes[l] = Enum.Notes.B5
@@ -203,7 +200,7 @@ def Estimate(array, sampleRate, deltaTime, EnumOctave):
             notes[l] = Enum.Notes.B6
         else:
             notes[l] = Enum.Notes.N
-        print("Note: ", notes)
+        print("Note: ", notes[l])
         print("l: ", l)
         l += 1
     return notes
@@ -216,8 +213,8 @@ def lightled(array,deltaTime,sampleRate):
 
 tone, sampleRate = load(Enum.AudioFiles.tone10)
 dft = fft(tone)
-#plot(dft,sampleRate)
-deltaTime = 0.2
+#plot(dft, sampleRate)
+deltaTime = 0.3
 
 Estimate(dft, sampleRate, deltaTime, Enum.Octaves.oct4)
 
