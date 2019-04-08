@@ -8,6 +8,9 @@ import time
 import random
 import warnings
 import Enum_Classes as Enum
+import pigpio as gp
+import math
+#import RPi.GPIO as GPIO
 # Takes a numpy array as an input
 
 
@@ -106,6 +109,9 @@ def load(enum):
     elif enum == Enum.AudioFiles.tone9:  # Frequency = 783.9909, Note = G5
         tone_9, sampleRate = librosa.load('Audio Files/toneg5.wav', res_type='scipy')
         return tone_9, sampleRate
+    elif enum == Enum.AudioFiles.tone10:  # Frequency = ???,
+        tone_10, sampleRate = librosa.load('Audio Files/jacob.wav', res_type='scipy')
+        return tone_10, sampleRate
 
 
 def fft(array):
@@ -140,7 +146,7 @@ def plot(array,samplerate):
 def Estimate(array, sampleRate, deltaTime, EnumOctave):
 
     numberOfSamples = sampleRate*deltaTime
-    i = round(len(array)/numberOfSamples)  # Number of total iterations
+    i = int(math.floor((len(array)/numberOfSamples))) # Number of total iterations
     notes = np.empty(shape=(i, 1), dtype=Enum.Notes)
     tmp = np.empty(shape=(len(array), 1), dtype=complex)
     start = 0
@@ -150,10 +156,9 @@ def Estimate(array, sampleRate, deltaTime, EnumOctave):
     print("Array Length: ", len(array))
     print("i: ", i)
     print("Time: ", len(array)/sampleRate)
-
     if Enum.Octaves.oct4:
-        minVal = 1936
-        maxVal = 2013
+        minVal = 1045
+        maxVal = 1500
         tmpMin = minVal
     while l < i:
         minVal = tmpMin
@@ -167,44 +172,55 @@ def Estimate(array, sampleRate, deltaTime, EnumOctave):
             tmp[index] = summation
             index += 1
             minVal += 1
-        freq = np.argmax(tmp)
-        start += numberOfSamples
+        freq = np.argmax(tmp) +tmpMin
+        start += int(numberOfSamples)
+        print(start)
+        print('NUM', numberOfSamples)
         print("Max Freq: ", np.argmax(tmp))
         print("Min Freq: ", np.argmin(tmp))
         print("Max Freq Value: ", np.amax(tmp))
         print("Min Freq Value: ", np.amin(tmp))
         print("Freq: ", freq)
-        if 247 < freq <= 276:
-            notes[l] = Enum.Notes.C4
-        elif 278 < freq <= 310:
-            notes[l] = Enum.Notes.D4
-        elif 312 < freq <= 340:
-            notes[l] = Enum.Notes.E4
-        elif 342 < freq <= 368:
-            notes[l] = Enum.Notes.F4
-        elif 370 < freq <= 390:
-            notes[l] = Enum.Notes.G4
-        elif 430 < freq <= 465:
-            notes[l] = Enum.Notes.A4
-        elif 482 < freq <= 520:
-            notes[l] = Enum.Notes.B4
+        if 967 < freq <= 1010:
+            notes[l] = Enum.Notes.B5
+        elif 1010 < freq <= 1106:
+            notes[l] = Enum.Notes.C6
+        elif 1370 < freq <= 1466:
+            notes[l] = Enum.Notes.F6
+        elif 1106 < freq <= 1244:
+            notes[l] = Enum.Notes.D6
+        elif 1244 < freq <= 1370:
+            notes[l] = Enum.Notes.E6
+        elif 1466 < freq <= 1628:
+            notes[l] = Enum.Notes.G6
+        elif 1628 < freq <= 1850:
+            notes[l] = Enum.Notes.A6
         elif 78 < freq <= 86:
             notes[l] = Enum.Notes.E2
+        elif 740 < freq <= 840:
+            notes[l] = Enum.Notes.G5
         elif 1936 < freq <= 2113:
             notes[l] = Enum.Notes.B6
         else:
             notes[l] = Enum.Notes.N
-        print("Note: ", notes[l])
+        print("Note: ", notes)
         print("l: ", l)
         l += 1
+    return notes
 
 
-lowLimit = 78
-highLimit = 86
-tone, sampleRate = load(Enum.AudioFiles.tone4)
+def lightled(array,deltaTime,sampleRate):
+    s = 0
+
+
+
+tone, sampleRate = load(Enum.AudioFiles.tone10)
 dft = fft(tone)
-deltaTime = 1
+#plot(dft,sampleRate)
+deltaTime = 0.2
+
 Estimate(dft, sampleRate, deltaTime, Enum.Octaves.oct4)
+
 
 
 
