@@ -13,6 +13,7 @@ class AudioFiles(Enum):
     tone8 = "tone8"
     tone9 = "tone9"
     tone10 = "tone10"
+    tone11 = "tone11"
 
 
 # Octave number
@@ -46,7 +47,8 @@ class Notes(Enum):
     B6 = 83  # Frequency = 1975.533, MIDI = 83
     B5 = 82  # Frequency = 987.77, MIDI = 82
     C6 = 84  # Frequency = 1046.50, MIDI = 67
-    D6 = 85  # Frequency = 1174.70, MIDI = 68
+    #C6S = 85 # Frequency = 1108.70, MIDI = 85
+    D6 = 86  # Frequency = 1174.70, MIDI = 68
     E6 = 88  # Frequency = 1318.50, MIDI = 69
     F6 = 89  # Frequency = 1396.9, MIDI = 70
     G6 = 91  # Frequency = 1568.0, MIDI = 71

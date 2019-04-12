@@ -1,5 +1,4 @@
 import tkinter
-import Auto_Correlation
 import Pitch_Estimation as pe
 import Tempo_Detection
 import LED
