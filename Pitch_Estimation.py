@@ -80,7 +80,7 @@ def plot(array,samplerate):
 
 
 def dft(array,minVal,maxVal):
-    tmp = np.empty(shape=(maxVal-minVal, 1), dtype=complex)
+    tmp = np.empty(shape=(maxVal-minVal), dtype=complex)
     if maxVal < len(array):
         interval = array[minVal:maxVal-1]
         tmp = np.fft.fft(interval)
@@ -96,7 +96,6 @@ def Estimate(array, sampleRate, deltaTime):
     start = 0
     iterations = 50
     iterationNum = 0
-   # print('NUM', numberOfSamples)
     minValue = 1030   # Minimum value when looking for frequency
     maxValue = 1560   # Maximum value when looking for frequency
     tmpMin = minValue     # Temporary value used for calculating frequency
@@ -148,28 +147,25 @@ def Estimate(array, sampleRate, deltaTime):
 def harmonic(array, sampleRate, deltaTime):
 
     numberOfSamples = int(sampleRate*deltaTime)  # Number of samples per time interval
-    totalIterations = int(math.floor((len(array) / numberOfSamples)))  # Number of total iterations
-    notes = np.empty(shape=(totalIterations, 1), dtype=Enum.Notes)
 
     iterations = 5
     minValue = 1040   # Minimum value when looking for frequency
     maxValue = 1580   # Maximum value when looking for frequency
     tmpMin = minValue     # Temporary value used for calculating frequency
     # Empty array which will be used to store summations in correlating to each candidate frequency
-    tmp = np.empty(shape=(len(array), 1), dtype=complex)
-    index = 0
+    tmp = np.empty(shape=(len(array)), dtype=complex)
+    index = 0 #index for tmp
     while minValue < maxValue:
         scalar = 1  # Scalar used to multiply with the candidate frequency
         summation = 0  # Variable used to store the sum of each frequency
-        while scalar < iterations:
+        while scalar <= iterations:
             if scalar * minValue < numberOfSamples-1:
-                summation += pow(np.abs(array[minValue * scalar]), 2)
+                summation += np.abs(array[minValue * scalar])**2
             scalar += 1
         tmp[index] = summation
         index += 1
         minValue += 1
-        freq = tmpMin + np.argmax(tmp)
-
+    freq = tmpMin + np.argmax(tmp)
     if 1029 < freq <= 1105:  # Checking if the frequency matches the key being played
         return Enum.Notes.C6, freq
     elif 1358 < freq <= 1466:  # Checking if the frequency matches the key being played
@@ -185,6 +181,7 @@ def harmonic(array, sampleRate, deltaTime):
         return Enum.Notes.N, freq
 
 
+
 def all():
     deltaTime = 1
 
@@ -195,30 +192,19 @@ def all():
     startIteration = 0
     minVal = 0
     maxVal = numberOfSamples
-
+    notes = np.empty(shape=(maxIteration), dtype=Enum.Notes)
     while startIteration < maxIteration:
         fft = dft(tone,minVal,maxVal)
-        tmp = harmonic(fft, sampleRate, deltaTime)
+        note = harmonic(fft, sampleRate, deltaTime)
+        notes[startIteration] = note
         #plot(fft, sampleRate)
-        print(tmp)
         startIteration += 1
         minVal += numberOfSamples-1
         maxVal += numberOfSamples-1
-
-
-
-
+    print(notes)
 
 
 all()
-'''
-tone, sampleRate = load(Enum.AudioFiles.tone10)
-dft = dft(tone)
-#plot(dft, sampleRate)
-deltaTime = 0.33
-tmp = Estimate(tone, sampleRate, deltaTime)
-plot(tone, sampleRate)
-'''
 
 
 
