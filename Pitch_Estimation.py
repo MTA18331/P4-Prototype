@@ -13,6 +13,7 @@ import math
 #import RPi.GPIO as GPIO
 # Takes a numpy array as an input
 
+
 def load(enum):
 
     if enum == Enum.AudioFiles.tone1:  # Frequency = 30.86771, Note = B0
@@ -48,13 +49,12 @@ def load(enum):
     elif enum == Enum.AudioFiles.tone11:  # Frequency = ???,
         tone_11, sampleRate = librosa.load('Audio Files/jacob2.wav', res_type='scipy')
         return tone_11, sampleRate
-
-
-def fft(array):
-    data = np.fft.fft(array)
-    #data = scipy.fft(array)
-
-    return data
+    elif enum == Enum.AudioFiles.tone12:  # Frequency = ???,
+        tone_12, sampleRate = librosa.load('Audio Files/jacob_32.wav', res_type='scipy')
+        return tone_12, sampleRate
+    elif enum == Enum.AudioFiles.tone13:  # Frequency = ???,
+        tone_13, sampleRate = librosa.load('Audio Files/jacob_160.wav', res_type='scipy')
+        return tone_13, sampleRate
 
 
 def plot(array,samplerate):
@@ -74,9 +74,17 @@ def plot(array,samplerate):
     plt.ylabel('Amplitude')
 
     plt.figure(figsize=(13, 5))
-    plt.plot(f[16070:56070], x_mag[16070:56070])
+    plt.plot(f[270:570], x_mag[270:570])
     plt.xlabel('frequency HZ')
     plt.show()
+
+
+def dft(array,minVal,maxVal):
+    tmp = np.empty(shape=(maxVal-minVal, 1), dtype=complex)
+    if maxVal < len(array):
+        interval = array[minVal:maxVal-1]
+        tmp = np.fft.fft(interval)
+    return tmp
 
 
 def Estimate(array, sampleRate, deltaTime):
@@ -88,7 +96,7 @@ def Estimate(array, sampleRate, deltaTime):
     start = 0
     iterations = 50
     iterationNum = 0
-    print('NUM', numberOfSamples)
+   # print('NUM', numberOfSamples)
     minValue = 1030   # Minimum value when looking for frequency
     maxValue = 1560   # Maximum value when looking for frequency
     tmpMin = minValue     # Temporary value used for calculating frequency
@@ -134,70 +142,87 @@ def Estimate(array, sampleRate, deltaTime):
         print("l: ", iterationNum)
 
         iterationNum += 1
-    return tmp
+    return notes
 
+
+def harmonic(array, sampleRate, deltaTime):
+
+    numberOfSamples = int(sampleRate*deltaTime)  # Number of samples per time interval
+    totalIterations = int(math.floor((len(array) / numberOfSamples)))  # Number of total iterations
+    notes = np.empty(shape=(totalIterations, 1), dtype=Enum.Notes)
+
+    iterations = 5
+    minValue = 1040   # Minimum value when looking for frequency
+    maxValue = 1580   # Maximum value when looking for frequency
+    tmpMin = minValue     # Temporary value used for calculating frequency
+    # Empty array which will be used to store summations in correlating to each candidate frequency
+    tmp = np.empty(shape=(len(array), 1), dtype=complex)
+    index = 0
+    while minValue < maxValue:
+        scalar = 1  # Scalar used to multiply with the candidate frequency
+        summation = 0  # Variable used to store the sum of each frequency
+        while scalar < iterations:
+            if scalar * minValue < numberOfSamples-1:
+                summation += pow(np.abs(array[minValue * scalar]), 2)
+            scalar += 1
+        tmp[index] = summation
+        index += 1
+        minValue += 1
+        freq = tmpMin + np.argmax(tmp)
+
+    if 1029 < freq <= 1105:  # Checking if the frequency matches the key being played
+        return Enum.Notes.C6, freq
+    elif 1358 < freq <= 1466:  # Checking if the frequency matches the key being played
+        return Enum.Notes.F6, freq
+    elif 1105 < freq <= 1244:  # Checking if the frequency matches the key being played
+        return Enum.Notes.D6, freq
+    elif 1244 < freq <= 1358:  # Checking if the frequency matches the key being played
+        return Enum.Notes.E6, freq
+    elif 1466 < freq <= 1628:  # Checking if the frequency matches the key being played
+        return Enum.Notes.G6, freq
+    # if the frequency is not within the ranges of the ones above, so we count it as there being no keys played
+    else:
+        return Enum.Notes.N, freq
+
+
+def all():
+    deltaTime = 1
+
+    tone, sampleRate = load(Enum.AudioFiles.tone12)
+    print(len(tone)/sampleRate)
+    numberOfSamples = int(sampleRate * deltaTime)  # Number of samples per time interval
+    maxIteration = int(math.floor((len(tone) / numberOfSamples)))  # Number of total iterations
+    startIteration = 0
+    minVal = 0
+    maxVal = numberOfSamples
+
+    while startIteration < maxIteration:
+        fft = dft(tone,minVal,maxVal)
+        tmp = harmonic(fft, sampleRate, deltaTime)
+        #plot(fft, sampleRate)
+        print(tmp)
+        startIteration += 1
+        minVal += numberOfSamples-1
+        maxVal += numberOfSamples-1
+
+
+
+
+
+
+all()
+'''
 tone, sampleRate = load(Enum.AudioFiles.tone10)
-dft = fft(tone)
+dft = dft(tone)
 #plot(dft, sampleRate)
 deltaTime = 0.33
-tmp = Estimate(dft, sampleRate, deltaTime)
-plot(tmp, sampleRate)
+tmp = Estimate(tone, sampleRate, deltaTime)
+plot(tone, sampleRate)
 '''
-        if 967 < freq <= 1010:
-            notes[l] = Enum.Notes.B5
-        elif 1010 < freq <= 1070:
-            notes[l] = Enum.Notes.C6
-        elif 1370 < freq <= 1466:
-            notes[l] = Enum.Notes.F6
-        elif 1150 < freq <= 1244:
-            notes[l] = Enum.Notes.D6
-        elif 1244 < freq <= 1370:
-            notes[l] = Enum.Notes.E6
-        elif 1466 < freq <= 1628:
-            notes[l] = Enum.Notes.G6
-        elif 1628 < freq <= 1850:
-            notes[l] = Enum.Notes.A6
-        elif 1070 < freq <= 1150:
-            notes[l] = Enum.Notes.C6S
-        elif 250 < freq <= 270:
-            notes[l] = Enum.Notes.C4
-        elif 740 < freq <= 840:
-            notes[l] = Enum.Notes.G5
-        elif 1936 < freq <= 2113:
-            notes[l] = Enum.Notes.B6
-        else:
-            notes[l] = Enum.Notes.N
-            
-            
 
 
 
 
-        if 967 < freq <= 1046:
-            notes[l] = Enum.Notes.B5
-        elif 1046 < freq <= 1108:
-            notes[l] = Enum.Notes.C6
-        elif 1396 < freq <= 1568:
-            notes[l] = Enum.Notes.F6
-        elif 1174 < freq <= 1318:
-            notes[l] = Enum.Notes.D6
-        elif 1318 < freq <= 1396:
-            notes[l] = Enum.Notes.E6
-        elif 1568 < freq <= 1750:
-            notes[l] = Enum.Notes.G6
-        elif 1750 < freq <= 1850:
-            notes[l] = Enum.Notes.A6
-        elif 1108 < freq <= 1174:
-            notes[l] = Enum.Notes.C6S
-        elif 250 < freq <= 270:
-            notes[l] = Enum.Notes.C4
-        elif 740 < freq <= 840:
-            notes[l] = Enum.Notes.G5
-        elif 1936 < freq <= 2113:
-            notes[l] = Enum.Notes.B6
-        else:
-            notes[l] = Enum.Notes.N
-        print("Note: ", notes)
-        print("l: ", l)
-        l += 1
-'''
+
+
+

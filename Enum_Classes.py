@@ -14,6 +14,8 @@ class AudioFiles(Enum):
     tone9 = "tone9"
     tone10 = "tone10"
     tone11 = "tone11"
+    tone12 = "tone12"
+    tone13 = "tone13"
 
 
 # Octave number

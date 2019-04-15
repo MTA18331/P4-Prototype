@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1e59b6f9-cc2f-454c-b443-e71c572fc679" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/jacob.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Auto_Correlation.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Enum_Classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Enum_Classes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pitch_Estimation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pitch_Estimation.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,15 +44,16 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Pitch_Estimation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="29">
-              <caret line="92" column="4" selection-start-line="92" selection-start-column="4" selection-end-line="92" selection-end-column="4" />
+            <state relative-caret-position="459">
+              <caret line="201" column="9" selection-start-line="201" selection-start-column="9" selection-end-line="201" selection-end-column="9" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
                 <element signature="e#231#255#0" />
-                <element signature="e#2061#4169#0" />
-                <element signature="e#4010#4080#0" />
-                <element signature="e#2551#2990#0" />
-                <element signature="e#6845#7531#1" />
+                <element signature="e#312#2788#0" />
+                <element signature="e#2458#2929#0" />
+                <element signature="e#2966#3141#0" />
+                <element signature="e#3560#6145#0" />
+                <element signature="e#8441#8619#1" />
               </folding>
             </state>
           </provider>
@@ -64,8 +62,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Enum_Classes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+            <state relative-caret-position="204">
+              <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -93,17 +91,17 @@
         <option value="$PROJECT_DIR$/Enum_Octaves.py" />
         <option value="$PROJECT_DIR$/Enum.py" />
         <option value="$PROJECT_DIR$/LED.py" />
-        <option value="$PROJECT_DIR$/Enum_Classes.py" />
         <option value="$PROJECT_DIR$/Main.py" />
+        <option value="$PROJECT_DIR$/Enum_Classes.py" />
         <option value="$PROJECT_DIR$/Pitch_Estimation.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="602" />
-    <option name="y" value="-18" />
-    <option name="width" value="989" />
-    <option name="height" value="1049" />
+    <option name="x" value="600" />
+    <option name="y" value="-20" />
+    <option name="width" value="990" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -215,14 +213,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13681428" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4976852" visible="true" weight="0.13681428" />
+      <window_info id="Structure" order="1" sideWeight="0.5023148" side_tool="true" weight="0.13681428" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22379604" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.38668555" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22946176" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.388102" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -253,17 +252,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout-to-restore>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Pitch_Estimation.py</url>
-          <line>11</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
@@ -326,6 +314,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/venv/Lib/site-packages/matplotlib/axes/_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="2491" selection-start-line="2491" selection-end-line="2491" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Auto_Correlation.py" />
+    <entry file="file://$PROJECT_DIR$/Main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="14" selection-start-column="14" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -340,41 +343,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/venv/Lib/site-packages/matplotlib/axes/_base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="2491" selection-start-line="2491" selection-end-line="2491" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Enum_Classes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Auto_Correlation.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="14" selection-start-column="14" selection-end-column="14" />
+        <state relative-caret-position="204">
+          <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Pitch_Estimation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="92" column="4" selection-start-line="92" selection-start-column="4" selection-end-line="92" selection-end-column="4" />
+        <state relative-caret-position="459">
+          <caret line="201" column="9" selection-start-line="201" selection-start-column="9" selection-end-line="201" selection-end-column="9" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
             <element signature="e#231#255#0" />
-            <element signature="e#2061#4169#0" />
-            <element signature="e#4010#4080#0" />
-            <element signature="e#2551#2990#0" />
-            <element signature="e#6845#7531#1" />
+            <element signature="e#312#2788#0" />
+            <element signature="e#2458#2929#0" />
+            <element signature="e#2966#3141#0" />
+            <element signature="e#3560#6145#0" />
+            <element signature="e#8441#8619#1" />
           </folding>
         </state>
       </provider>
