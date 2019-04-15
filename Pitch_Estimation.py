@@ -10,51 +10,16 @@ import warnings
 import Enum_Classes as Enum
 import pigpio as gp
 import math
-#import RPi.GPIO as GPIO
-# Takes a numpy array as an input
 
 
 def load(enum):
 
     if enum == Enum.AudioFiles.tone1:  # Frequency = 30.86771, Note = B0
-        tone_1, sampleRate = librosa.load('Audio Files/Tone1.wav', res_type='scipy')
+        tone_1, sampleRate = librosa.load('Audio Files/abc.wav', res_type='scipy')
         return tone_1, sampleRate
-    elif enum == Enum.AudioFiles.tone2:  # Frequency = 783.9909, Note = G5
-        tone_2, sampleRate = librosa.load('Audio Files/Tone2.wav', res_type='scipy')
+    elif enum == Enum.AudioFiles.tone2:  # Frequency = ???,
+        tone_2, sampleRate = librosa.load('Audio Files/jacob_full1.wav', res_type='scipy')
         return tone_2, sampleRate
-    elif enum == Enum.AudioFiles.tone3:  # Frequency = 5274.04, Note = B8
-        tone_3, sampleRate = librosa.load('Audio Files/Tone3.wav', res_type='scipy')
-        return tone_3, sampleRate
-    elif enum == Enum.AudioFiles.tone4:  # tone_6, tone_7, tone_8
-        tone_4, sampleRate = librosa.load('Audio Files/3_tones.wav', res_type='scipy')
-        return tone_4, sampleRate
-    elif enum == Enum.AudioFiles.tone5:  # Frequency = 783.9909, Note = G5
-        tone_5, sampleRate = librosa.load('Audio Files/G5piano.wav', res_type='scipy')
-        return tone_5, sampleRate
-    elif enum == Enum.AudioFiles.tone6:  # Frequency = 261.63, Note = C4
-        tone_6, sampleRate = librosa.load('Audio Files/Tone_1_261.wav', res_type='scipy')
-        return tone_6, sampleRate
-    elif enum == Enum.AudioFiles.tone7:  # Frequency = 82.41, Note = E2
-        tone_7, sampleRate = librosa.load('Audio Files/Tone_2_82.wav', res_type='scipy')
-        return tone_7, sampleRate
-    elif enum == Enum.AudioFiles.tone8:  # Frequency = 1975.533, Note = B6
-        tone_8, sampleRate = librosa.load('Audio Files/Tone_3_1975.wav', res_type='scipy')
-        return tone_8, sampleRate
-    elif enum == Enum.AudioFiles.tone9:  # Frequency = 783.9909, Note = G5
-        tone_9, sampleRate = librosa.load('Audio Files/toneg5.wav', res_type='scipy')
-        return tone_9, sampleRate
-    elif enum == Enum.AudioFiles.tone10:  # Frequency = ???,
-        tone_10, sampleRate = librosa.load('Audio Files/jacob1.wav', res_type='scipy')
-        return tone_10, sampleRate
-    elif enum == Enum.AudioFiles.tone11:  # Frequency = ???,
-        tone_11, sampleRate = librosa.load('Audio Files/jacob2.wav', res_type='scipy')
-        return tone_11, sampleRate
-    elif enum == Enum.AudioFiles.tone12:  # Frequency = ???,
-        tone_12, sampleRate = librosa.load('Audio Files/jacob_32.wav', res_type='scipy')
-        return tone_12, sampleRate
-    elif enum == Enum.AudioFiles.tone13:  # Frequency = ???,
-        tone_13, sampleRate = librosa.load('Audio Files/jacob_160.wav', res_type='scipy')
-        return tone_13, sampleRate
 
 
 def plot(array,samplerate):
@@ -149,8 +114,8 @@ def harmonic(array, sampleRate, deltaTime):
     numberOfSamples = int(sampleRate*deltaTime)  # Number of samples per time interval
 
     iterations = 5
-    minValue = 1040   # Minimum value when looking for frequency
-    maxValue = 1580   # Maximum value when looking for frequency
+    minValue = 730   # Minimum value when looking for frequency
+    maxValue = 1800   # Maximum value when looking for frequency
     tmpMin = minValue     # Temporary value used for calculating frequency
     # Empty array which will be used to store summations in correlating to each candidate frequency
     tmp = np.empty(shape=(len(array)), dtype=complex)
@@ -166,26 +131,29 @@ def harmonic(array, sampleRate, deltaTime):
         index += 1
         minValue += 1
     freq = tmpMin + np.argmax(tmp)
-    if 1029 < freq <= 1105:  # Checking if the frequency matches the key being played
+    if 730 < freq <= 900:
+        return Enum.Notes.G5, freq
+    elif 1029 < freq <= 1105:  # Checking if the frequency matches the key being played
         return Enum.Notes.C6, freq
-    elif 1358 < freq <= 1466:  # Checking if the frequency matches the key being played
-        return Enum.Notes.F6, freq
     elif 1105 < freq <= 1244:  # Checking if the frequency matches the key being played
         return Enum.Notes.D6, freq
     elif 1244 < freq <= 1358:  # Checking if the frequency matches the key being played
         return Enum.Notes.E6, freq
+    elif 1358 < freq <= 1466:  # Checking if the frequency matches the key being played
+        return Enum.Notes.F6, freq
     elif 1466 < freq <= 1628:  # Checking if the frequency matches the key being played
         return Enum.Notes.G6, freq
+    elif 1628 < freq <= 1800:  # Checking if the frequency matches the key being played
+        return Enum.Notes.A6, freq
     # if the frequency is not within the ranges of the ones above, so we count it as there being no keys played
     else:
         return Enum.Notes.N, freq
 
 
-
 def all():
     deltaTime = 1
 
-    tone, sampleRate = load(Enum.AudioFiles.tone12)
+    tone, sampleRate = load(Enum.AudioFiles.tone1)
     print(len(tone)/sampleRate)
     numberOfSamples = int(sampleRate * deltaTime)  # Number of samples per time interval
     maxIteration = int(math.floor((len(tone) / numberOfSamples)))  # Number of total iterations
@@ -205,7 +173,6 @@ def all():
 
 
 all()
-
 
 
 

@@ -33,7 +33,7 @@ GPIO.output(g, GPIO.LOW)
 switchPin = 11
 GPIO.setup(switchPin, GPIO.IN)
 
-#soundC = AudioSegment.from_wav("C.wav")
+
 
 def print_devices():
     for n in range(pygame.midi.get_count()):
