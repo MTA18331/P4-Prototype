@@ -3,28 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1e59b6f9-cc2f-454c-b443-e71c572fc679" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/3_tones.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/C.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/D.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/E.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/F.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/G.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/G5piano.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/Tone1.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/Tone2.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/Tone3.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/Tone_1_261.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/Tone_2_82.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/Tone_3_1975.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/Tones info.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/Tones.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/jacob1.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/jacob2.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/jacob_160.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Audio Files/toneg5.wav" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Enum_Classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Enum_Classes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pitch_Estimation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pitch_Estimation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/midi v1.py" beforeDir="false" afterPath="$PROJECT_DIR$/midi v1.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,12 +17,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Pitch_Estimation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="17" column="58" selection-start-line="17" selection-start-column="58" selection-end-line="17" selection-end-column="58" />
+            <state relative-caret-position="144">
+              <caret line="100" column="50" lean-forward="true" selection-start-line="100" selection-start-column="50" selection-end-line="100" selection-end-column="50" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
-                <element signature="e#2829#3300#0" />
-                <element signature="e#3561#6111#0" />
               </folding>
             </state>
           </provider>
@@ -51,8 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Enum_Classes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
-              <caret line="57" column="46" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
+            <state relative-caret-position="348">
+              <caret line="57" column="47" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -215,7 +193,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28328612" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.39093485" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.388102" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -292,16 +270,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Enum_Octaves.py" />
     <entry file="file://$PROJECT_DIR$/Enum.py" />
-    <entry file="file://$PROJECT_DIR$/Audio Files/Tones info.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Audio Files/Tones.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Audio Files/Tones info.txt" />
+    <entry file="file://$PROJECT_DIR$/Audio Files/Tones.txt" />
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -348,21 +318,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Downloads/opencv_contrib_python_headless-3.4.3.18-cp35-cp35m-linux_armv6l.whl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/Enum_Classes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="57" column="46" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
+        <state relative-caret-position="348">
+          <caret line="57" column="47" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Pitch_Estimation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="17" column="58" selection-start-line="17" selection-start-column="58" selection-end-line="17" selection-end-column="58" />
+        <state relative-caret-position="144">
+          <caret line="100" column="50" lean-forward="true" selection-start-line="100" selection-start-column="50" selection-end-line="100" selection-end-column="50" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
-            <element signature="e#2829#3300#0" />
-            <element signature="e#3561#6111#0" />
           </folding>
         </state>
       </provider>

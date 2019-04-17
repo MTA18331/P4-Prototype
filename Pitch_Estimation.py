@@ -13,25 +13,27 @@ import math
 
 
 def load(enum):
+    x = 0
 
-    if enum == Enum.AudioFiles.tone1:  # Frequency = 30.86771, Note = B0
-        tone_1, sampleRate = librosa.load('Audio Files/abc.wav', res_type='scipy')
-        return tone_1, sampleRate
+    if enum == Enum.AudioFiles.tone1:  # Frequency = ???,
+        sampleRate, tone_1 = scipy.io.wavfile.read('Audio Files/abc.wav')
+        tmp = np.empty(shape=(len(tone_1)), dtype=complex)
+        while x < len(tone_1):
+            tmp[x] = tone_1[x, 0]
+            x += 1
+        return tmp, sampleRate
     elif enum == Enum.AudioFiles.tone2:  # Frequency = ???,
-        tone_2, sampleRate = librosa.load('Audio Files/jacob_full1.wav', res_type='scipy')
-        return tone_2, sampleRate
+        sampleRate, tone_2 = scipy.io.wavfile.read('Audio Files/jacob_full1.wav')
+        tmp = np.empty(shape=(len(tone_2)), dtype=complex)
+        while x < len(tone_2):
+            tmp[x] = tone_2[x,0]
+            x += 1
+        return tmp, sampleRate
 
 
 def plot(array,samplerate):
-    #time = array.shape[0] / samplerate
     x_mag = np.absolute(array)
     f = np.linspace(0,samplerate,len(x_mag))
-    #print(np.amax(array))
-    #value = np.argmax(array)
-    #print(array[value])
-    #print(x_mag[value])
-
-    #print(time)
 
     plt.figure(figsize=(13, 5))
     plt.plot(f, x_mag)
@@ -50,63 +52,6 @@ def dft(array,minVal,maxVal):
         interval = array[minVal:maxVal-1]
         tmp = np.fft.fft(interval)
     return tmp
-
-
-def Estimate(array, sampleRate, deltaTime):
-
-    numberOfSamples = int(sampleRate*deltaTime)  # Number of samples per time interval
-    totalIterations = int(math.floor((len(array)/numberOfSamples)))  # Number of total iterations
-    notes = np.empty(shape=(totalIterations, 1), dtype=Enum.Notes)    # Empty array which will be used to store notes in
-
-    start = 0
-    iterations = 50
-    iterationNum = 0
-    minValue = 1030   # Minimum value when looking for frequency
-    maxValue = 1560   # Maximum value when looking for frequency
-    tmpMin = minValue     # Temporary value used for calculating frequency
-    # Empty array which will be used to store summations in correlating to each candidate frequency
-    tmp = np.empty(shape=(maxValue - minValue, 1), dtype=complex)
-
-    while iterationNum < totalIterations:
-        minValue = tmpMin
-        index = 0   # Index in temporary array
-
-        while minValue < maxValue:
-            scalar = 1  # Scalar used to multiply with the candidate frequency
-            summation = 0   # Variable used to store the sum of each frequency
-            while scalar <= iterations:
-                if scalar*minValue+start < start+numberOfSamples:
-                    summation += pow(np.abs(array[minValue*scalar+start]), 2)
-                scalar += 1
-            tmp[index] = summation
-            index += 1
-            minValue += 1
-
-        freq = tmpMin + np.argmax(tmp)
-        print("Start: ", start)
-        print("Max Freq: ", np.argmax(tmp))
-        print("Min Freq: ", np.argmin(tmp))
-        print("Freq: ", freq)
-        start += numberOfSamples
-
-        if 1029 < freq <= 1105:     # Checking if the frequency matches the key being played
-            notes[iterationNum] = Enum.Notes.C6
-        elif 1358 < freq <= 1466:   # Checking if the frequency matches the key being played
-            notes[iterationNum] = Enum.Notes.F6
-        elif 1105 < freq <= 1244:   # Checking if the frequency matches the key being played
-            notes[iterationNum] = Enum.Notes.D6
-        elif 1244 < freq <= 1358:   # Checking if the frequency matches the key being played
-            notes[iterationNum] = Enum.Notes.E6
-        elif 1466 < freq <= 1628:   # Checking if the frequency matches the key being played
-            notes[iterationNum] = Enum.Notes.G6
-        # if the frequency is not within the ranges of the ones above, so we count it as there being no keys played
-        else:
-            notes[iterationNum] = Enum.Notes.N
-        print("Note: ", notes)
-        print("l: ", iterationNum)
-
-        iterationNum += 1
-    return notes
 
 
 def harmonic(array, sampleRate, deltaTime):
@@ -132,25 +77,25 @@ def harmonic(array, sampleRate, deltaTime):
         minValue += 1
     freq = tmpMin + np.argmax(tmp)
     if 730 < freq <= 900:
-        return Enum.Notes.G5, freq
+        return Enum.Notes.G5
     elif 1029 < freq <= 1105:  # Checking if the frequency matches the key being played
-        return Enum.Notes.C6, freq
+        return Enum.Notes.C6
     elif 1105 < freq <= 1244:  # Checking if the frequency matches the key being played
-        return Enum.Notes.D6, freq
+        return Enum.Notes.D6
     elif 1244 < freq <= 1358:  # Checking if the frequency matches the key being played
-        return Enum.Notes.E6, freq
+        return Enum.Notes.E6
     elif 1358 < freq <= 1466:  # Checking if the frequency matches the key being played
-        return Enum.Notes.F6, freq
+        return Enum.Notes.F6
     elif 1466 < freq <= 1628:  # Checking if the frequency matches the key being played
-        return Enum.Notes.G6, freq
+        return Enum.Notes.G6
     elif 1628 < freq <= 1800:  # Checking if the frequency matches the key being played
-        return Enum.Notes.A6, freq
+        return Enum.Notes.A6
     # if the frequency is not within the ranges of the ones above, so we count it as there being no keys played
     else:
-        return Enum.Notes.N, freq
+        return Enum.Notes.N
 
 
-def all():
+def loop():
     deltaTime = 1
 
     tone, sampleRate = load(Enum.AudioFiles.tone1)
@@ -172,7 +117,7 @@ def all():
     print(notes)
 
 
-all()
+loop()
 
 
 

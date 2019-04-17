@@ -55,7 +55,7 @@ class Notes(Enum):
     F6 = 89  # Frequency = 1396.9, MIDI = 70
     G6 = 91  # Frequency = 1568.0, MIDI = 71
     A6 = 94  # Frequency = 1750.0, MIDI = 78
-    B6 = 83  # Frequency = 1975.533, MIDI = 83
+    B6 = 83  # Frequency = 1975.533, MIDI = 835
 
     N = 0
 
