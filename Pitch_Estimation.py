@@ -95,6 +95,25 @@ def harmonic(array, sampleRate, deltaTime):
         return Enum.Notes.N
 
 
+def autoCorrelation(array, sampleRate, tau):
+
+    tmp = np.empty(shape=tau, dtype=float)
+    index = 0
+    maxVal = 270
+    while tau < maxVal:
+        n = tau
+        summation = 0
+        while n < len(array):
+            summation += array[n]*array[n-tau]
+            n += 1
+        tmp[index] = (1/len(array)-tau)*summation
+        index += 1
+        tau += 1
+    tempo = np.argmax(tmp)
+    return tempo
+
+
+
 def loop():
     deltaTime = 1
 
